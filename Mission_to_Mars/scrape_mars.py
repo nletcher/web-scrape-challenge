@@ -11,6 +11,12 @@ import requests
 
 
 # In[4]:
+# DB Setup
+
+client = pymongo.MongoClient('mongodb://localhost:27017')
+db = client.mars_db
+collection = db.mars 
+
 
 
 #Setting executable path on Windows
@@ -183,4 +189,21 @@ for result in results:
     hemispheres.append(hem_dict)
 
 print(hemispheres)
+
+
+ # Create data dictionary
+    mars_data = {
+		'news_title' : news_title,
+		'summary': news_para,
+        'featured_image': featured_image_url,
+        'featured_image_title': featured_image_title,
+        'fact_table': mars_fact_html,
+		'hemisphere_image_urls': hemisphere_image_urls,
+        'news_url': news_url,
+        'jpl_url': image_url_featured,
+        'fact_url': mars_facts_url,
+        'hemisphere_url': hemispheres_url,
+        }
+    collection.insert(mars_data)
+
 
